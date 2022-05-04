@@ -1,7 +1,3 @@
-from multiprocessing.sharedctypes import Value
-from unittest.mock import NonCallableMagicMock
-
-
 class Node:
     def __init__(self, val) -> None:
         self.value = val
@@ -41,7 +37,7 @@ class Wavl:
 
 
     # Find the inorder successor
-    def minValueNode(node):
+    def minValueNode(self, node):
         current = node
 
         # Find the leftmost leaf
