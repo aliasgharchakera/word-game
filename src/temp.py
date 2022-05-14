@@ -310,11 +310,11 @@ class WAVL:
             #print(node.rank, end=')')
             self._inorder_util(node.right)
 
-wavl = WAVL()
-wavl.insert(10)
-wavl.insert(100)
-wavl.insert(5)
-wavl.insert(600)
-wavl.insert(7)
+# wavl = WAVL()
+# wavl.insert(10)
+# wavl.insert(100)
+# wavl.insert(5)
+# wavl.insert(600)
+# wavl.insert(7)
 
-wavl.inorder()
+# wavl.inorder()
