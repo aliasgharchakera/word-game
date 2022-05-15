@@ -1,5 +1,5 @@
 import csv
-from temp import WAVL
+from wavl import WAVL
 
 def tokenize(word):
     new = ""
