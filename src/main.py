@@ -14,18 +14,18 @@ def tokenize(word: Any) -> str:
             new += i
     return new.lower()
 
-def loadData(path: Any, wavl: WAVL):
+def load_data(path: Any, wavl: WAVL) -> None:
     # f = open(path, 'rt')
     # f = open(path)
     # dic = json.load(f)
     # dic = csv.reader(f)
     dic = words.words()
-    i, j = 0, 0
+    # i, j = 0, 0
     for word in dic:
-        i+= 1
+        # i+= 1
         word = tokenize(word)
         if not wavl.search(word):
-            j += 1
+            # j += 1
             wavl.insert(word)
     # print(i, j)
 
@@ -35,20 +35,20 @@ def search(wavl: WAVL) -> None:
         print(wavl.search(query))
         query = input("What word u want to search: ")
 
-def alphabet_generator():
+def alphabet_generator() -> list:
     alpha = []
     vowels = "aeiou"
     abc = "bcdfghjklmnpqrstvwxyz"
 
     for i in range(12):
-        a = randint(0, 1)
+        a = randint(0, 2)
         if a:
             alpha.append(abc[randint(0, 20)])
         else:
             alpha.append(vowels[randint(0, 4)])
     return alpha
 
-def wordcheck(word: str, done: list, wavl: WAVL) -> bool:
+def word_check(word: str, done: list, wavl: WAVL) -> bool:
     if wavl.search(word):
         wavl.remove(word)
         done.append(word)
@@ -59,13 +59,27 @@ def wordcheck(word: str, done: list, wavl: WAVL) -> bool:
 #     for i in range(len(words)):
 #         for j in range(len(words) - 1):
 
-            
+def main():
+    print("Loading data...")
+    wavl = WAVL()
+    load_data('urbandict-csv.csv', wavl)
+    print("Loaded data successfully")
+    # search(wavl)
+    # for i in range(5):
+    while True:
+        alph = alphabet_generator()
+        print(alph)
+        done = list()
+        points = 0
+        word = input()
+        while word != "q":
+            if word_check(word, done, wavl):
+                points += 5
+                print("Valid entry", points)
+            else:
+                print("Invalid entry", points)
+            word = input()
+        for i in done:
+            wavl.insert(i)
 
-print("Loading data...")
-wavl = WAVL()
-loadData('urbandict-csv.csv', wavl)
-print("Loaded data successfully")
-search(wavl)
-for i in range(5):
-    alph = alphabet_generator()
-    print(alph)
+main()
