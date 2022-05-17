@@ -39,7 +39,7 @@ def search(wavl: WAVL) -> None:
         query = input("What word u want to search: ")
 
 def alphabet_generator() -> list:
-    alpha = []
+    alpha = ""
     vowels = "aeiou"
     tier1 = "aeionprst"
     tier2 = "ubcdfghlmv"
@@ -49,15 +49,15 @@ def alphabet_generator() -> list:
     rare = "jkqwxyz"
     abc = "bcdfghjklmnpqrstvwxyz"
 
-    for i in range(12):
+    for i in range(8):
         a = randint(0, 9)
         if a in [0, 4, 8, 9]:
-            alpha.append(choice(tier1))
+            alpha += choice(tier1)
         else:
             if a in [1, 2, 3, 7]:
-                alpha.append(choice(tier2))
+                alpha += choice(tier2)
             elif a in [5, 6]:
-                alpha.append(choice(tier3))
+                alpha += choice(tier3)
             # else:
             #     alpha.append(rare[randint(0, 6)])
             # alpha.append(vowels[randint(0, 4)])
@@ -70,43 +70,39 @@ def word_check(word: str, done: list, wavl: WAVL) -> bool:
         return True
     return False
 
-# def words_possible(words, wavl):
-#     for i in range(len(words)):
-#         for j in range(len(words) - 1):
-
-def getallperms(letters: list, wavl: WAVL): #letters is a string of letters
+def getallperms(letters: str): #letters is a string of letters
     lst = []
-    str = " ".join([i for i in letters])
-    for i in range(3,len(str)+1):
-        perms = list(itertools.permutations(str,i))
+    for i in range(3,len(letters)+1):
+        perms = list(itertools.permutations(letters,i))
         lst = lst + perms
-    count = 0
-    print(lst[0])
-    # for i in list:
-    #     if wavl.search(i):
-    #         count += 1
-    return count #lst is list of tuples, each tuple is a permuatation
-
+    return lst #lst is list of tuples, each tuple is a permuatation
 
 def truewords(perms): #perms is permutations list from getallperms function
     permutations = []
     for perm in perms:
         permutations.append("".join(perm))
     foundlst = list(set(permutations).intersection(set(x.lower() for x in words.words())))
-    print(len(foundlst))
-
+    # print(len(foundlst))
+    # print(foundlst)
+    if len(foundlst) >= 49:
+        return True, len(foundlst)
+    return False, len(foundlst)
 
 def main():
     print("Loading data...")
     wavl = WAVL()
     load_data('urbandict-csv.csv', wavl)
     print("Loaded data successfully")
-    # search(wavl)
-    # for i in range(5):
     while True:
         alph = alphabet_generator()
         print(alph)
-        # print(getallperms(alph, wavl))
+        perm = getallperms(alph)
+        run, _length = truewords(perm)
+        while not run:
+            alph = alphabet_generator()
+            print(alph)
+            perm = getallperms(alph)
+            run, _length = truewords(perm)
         done = list()
         points = 0
         word = input()
@@ -115,7 +111,10 @@ def main():
                 points += 5
                 print("Valid entry", points)
             else:
-                print("Invalid entry", points)
+                if word in done:
+                    print("Duplicate entry not allowed")
+                else:
+                    print("Invalid word", points)
             word = input()
         for i in done:
             wavl.insert(i)
