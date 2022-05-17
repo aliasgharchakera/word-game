@@ -2,7 +2,7 @@
 # import nltk
 # import json
 # nltk.download()
-from random import randint, randrange
+from random import randint, choice
 # from this import d
 # from webbrowser import get
 from wavl import WAVL
@@ -41,6 +41,9 @@ def search(wavl: WAVL) -> None:
 def alphabet_generator() -> list:
     alpha = []
     vowels = "aeiou"
+    tier1 = "aeionprst"
+    tier2 = "ubcdfghlmv"
+    tier3 = "jkqwxyz"
     common = "nprst"
     medium = "bcdfghlmv"
     rare = "jkqwxyz"
@@ -48,15 +51,15 @@ def alphabet_generator() -> list:
 
     for i in range(12):
         a = randint(0, 9)
-        if a in [0, 4, 8]:
-            alpha.append(vowels[randint(0, 4)])
+        if a in [0, 4, 8, 9]:
+            alpha.append(choice(tier1))
         else:
             if a in [1, 2, 3, 7]:
-                alpha.append(common[randint(0, 4)])
+                alpha.append(choice(tier2))
             elif a in [5, 6]:
-                alpha.append(medium[randint(0, 8)])
-            else:
-                alpha.append(rare[randint(0, 6)])
+                alpha.append(choice(tier3))
+            # else:
+            #     alpha.append(rare[randint(0, 6)])
             # alpha.append(vowels[randint(0, 4)])
     return alpha
 

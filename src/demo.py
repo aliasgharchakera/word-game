@@ -1,7 +1,7 @@
-import nltk
+# import nltk
 import random
 import itertools
-nltk.download("words")
+# nltk.download("words")
 from nltk.corpus import words
 
 
