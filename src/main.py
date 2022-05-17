@@ -3,6 +3,8 @@
 # import json
 # nltk.download()
 from random import randint, randrange
+from this import d
+from webbrowser import get
 from wavl import WAVL
 from nltk.corpus import words
 from typing import Any
@@ -68,12 +70,18 @@ def word_check(word: str, done: list, wavl: WAVL) -> bool:
 #     for i in range(len(words)):
 #         for j in range(len(words) - 1):
 
-def getallperms(letters): #letters is a string of letters
+def getallperms(letters: list, wavl: WAVL): #letters is a string of letters
     lst = []
-    for i in range(2,len(letters)+1):
-        perms = list(itertools.permutations(letters,i))
+    str = " ".join([i for i in letters])
+    for i in range(2,len(str)+1):
+        perms = list(itertools.permutations(str, i))
         lst = lst + perms
-    return lst #lst is list of tuples, each tuple is a permuatation
+    count = 0
+    # print(lst[0])
+    # for i in list:
+    #     if wavl.search(i):
+    #         count += 1
+    return count #lst is list of tuples, each tuple is a permuatation
 
 def main():
     print("Loading data...")
@@ -84,7 +92,7 @@ def main():
     # for i in range(5):
     while True:
         alph = alphabet_generator()
-        print(alph)
+        getallperms(alph, wavl)
         done = list()
         points = 0
         word = input()
