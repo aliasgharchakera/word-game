@@ -68,6 +68,13 @@ def word_check(word: str, done: list, wavl: WAVL) -> bool:
 #     for i in range(len(words)):
 #         for j in range(len(words) - 1):
 
+def getallperms(letters): #letters is a string of letters
+    lst = []
+    for i in range(2,len(letters)+1):
+        perms = list(itertools.permutations(letters,i))
+        lst = lst + perms
+    return lst #lst is list of tuples, each tuple is a permuatation
+
 def main():
     print("Loading data...")
     wavl = WAVL()
