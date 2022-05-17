@@ -70,7 +70,7 @@ def word_check(word: str, done: list, wavl: WAVL) -> bool:
 
 def getallperms(letters): #letters is a string of letters
     lst = []
-    for i in range(2,len(letters)+1):
+    for i in range(3,len(letters)+1):
         perms = list(itertools.permutations(letters,i))
         lst = lst + perms
     return lst #lst is list of tuples, each tuple is a permuatation
