@@ -38,14 +38,23 @@ def search(wavl: WAVL) -> None:
 def alphabet_generator() -> list:
     alpha = []
     vowels = "aeiou"
+    common = "nprst"
+    medium = "bcdfghlmv"
+    rare = "jkqwxyz"
     abc = "bcdfghjklmnpqrstvwxyz"
 
     for i in range(12):
-        a = randint(0, 2)
-        if a:
-            alpha.append(abc[randint(0, 20)])
-        else:
+        a = randint(0, 9)
+        if a in [0, 4, 8]:
             alpha.append(vowels[randint(0, 4)])
+        else:
+            if a in [1, 2, 3, 7]:
+                alpha.append(common[randint(0, 4)])
+            elif a in [5, 6]:
+                alpha.append(medium[randint(0, 8)])
+            else:
+                alpha.append(rare[randint(0, 6)])
+            # alpha.append(vowels[randint(0, 4)])
     return alpha
 
 def word_check(word: str, done: list, wavl: WAVL) -> bool:
