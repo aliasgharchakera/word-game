@@ -1,3 +1,10 @@
+#remove text box
+#add random letters on screen
+#arrange them in particular order to make sense of a word 
+#can generate more than 1 word from the letters provided 
+#*in the given time frame*
+
+
 import pygame as pg
 
 
@@ -6,7 +13,9 @@ screen = pg.display.set_mode((640, 480)) #Game Window
 
 
 #TextBox
+#text box not being used 
 COLOR_INACTIVE = pg.Color('lightskyblue3')
+#text box being used 
 COLOR_ACTIVE = pg.Color('floralwhite')
 FONT = pg.font.Font(None, 32)
 
@@ -15,7 +24,6 @@ score_value=0
 font_score = pg.font.Font('freesansbold.ttf',16)
 textX = 10
 textY = 10
-
 
 class InputBox:
 
