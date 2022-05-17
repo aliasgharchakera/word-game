@@ -87,6 +87,15 @@ def getallperms(letters: list, wavl: WAVL): #letters is a string of letters
     #         count += 1
     return count #lst is list of tuples, each tuple is a permuatation
 
+
+def truewords(perms): #perms is permutations list from getallperms function
+    permutations = []
+    for perm in perms:
+        permutations.append("".join(perm))
+    foundlst = list(set(permutations).intersection(set(x.lower() for x in words.words())))
+    print(len(foundlst))
+
+
 def main():
     print("Loading data...")
     wavl = WAVL()
