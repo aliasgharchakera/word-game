@@ -72,9 +72,8 @@ def word_check(word: str, done: list, wavl: WAVL) -> bool:
 
 def getallperms(letters: list, wavl: WAVL): #letters is a string of letters
     lst = []
-    str = " ".join([i for i in letters])
-    for i in range(2,len(str)+1):
-        perms = list(itertools.permutations(str, i))
+    for i in range(3,len(letters)+1):
+        perms = list(itertools.permutations(letters,i))
         lst = lst + perms
     count = 0
     # print(lst[0])
