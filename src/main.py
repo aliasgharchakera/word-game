@@ -3,11 +3,12 @@
 # import json
 # nltk.download()
 from random import randint, randrange
-from this import d
-from webbrowser import get
+# from this import d
+# from webbrowser import get
 from wavl import WAVL
 from nltk.corpus import words
 from typing import Any
+import itertools
 
 def tokenize(word: Any) -> str:
     new = ""
@@ -72,11 +73,12 @@ def word_check(word: str, done: list, wavl: WAVL) -> bool:
 
 def getallperms(letters: list, wavl: WAVL): #letters is a string of letters
     lst = []
-    for i in range(3,len(letters)+1):
-        perms = list(itertools.permutations(letters,i))
+    str = " ".join([i for i in letters])
+    for i in range(3,len(str)+1):
+        perms = list(itertools.permutations(str,i))
         lst = lst + perms
     count = 0
-    # print(lst[0])
+    print(lst[0])
     # for i in list:
     #     if wavl.search(i):
     #         count += 1
@@ -91,7 +93,8 @@ def main():
     # for i in range(5):
     while True:
         alph = alphabet_generator()
-        getallperms(alph, wavl)
+        print(alph)
+        # print(getallperms(alph, wavl))
         done = list()
         points = 0
         word = input()
