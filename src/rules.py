@@ -13,6 +13,10 @@ pygame.display.set_icon(icon)
 while True:
     rules.fill((0,0,0))
     rules.blit(icon, (0,0))
-    pygame.display.update()
-
     
+    pygame.display.update()
+    if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+
+
