@@ -1,6 +1,5 @@
 class WAVLNode:
     def __init__(self, key, left=None, right=None, rank=0, parent=None):
-        #super(WAVLNode, self).__init__(key, left, right, parent)
         self.left = left
         self.right = right
         self.key = key
