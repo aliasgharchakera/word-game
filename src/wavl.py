@@ -1,5 +1,6 @@
 class WAVLNode:
     def __init__(self, key, left=None, right=None, rank=0, parent=None):
+        #super(WAVLNode, self).__init__(key, left, right, parent)
         self.left = left
         self.right = right
         self.key = key
@@ -9,7 +10,7 @@ class WAVLNode:
 class WAVL:
     def __init__(self):
         self.root = None
-        
+
     def print_root(self):
         print("root is ", end='')
         print(self.root.key)
@@ -32,26 +33,32 @@ class WAVL:
         return x
 
 
-    def height(self, node):
+    def height(self):
+        return self._height(self.root)
+
+    def _height(self, node):
         if not node:
             return 0
 
-        lheight = self.height(node.left)
-        rheight = self.height(node.right)
+        lheight = self._height(node.left)
+        rheight = self._height(node.right)
         return max(lheight, rheight) + 1
 
-    def search(self, key, node):
+    def search(self, key):
+        return self._search(key, self.root)
+
+    def _search(self, key, node):
         if not node:
             return False
         elif key == node.key:
             return True
         elif key < node.key:
-            return self.search(key, node.left)
+            return self._search(key, node.left)
         else:
-            return self.search(key, node.right)
+            return self._search(key, node.right)
 
     # adapted from CLRS edition 3, page 313
-    def leftRotate(self, x):
+    def left_rotate(self, x):
         y = x.right
         x.right = y.left
         if y.left != None:
@@ -67,7 +74,7 @@ class WAVL:
         x.parent = y
 
     # adapted from CLRS edition 3, page 313
-    def rightRotate(self, x):
+    def right_rotate(self, x):
         y = x.left
         x.left = y.right
         if y.right != None:
@@ -82,15 +89,15 @@ class WAVL:
         y.right = x
         x.parent = y
 
-    def rankDifference(self, node):
-        leftDiff = node.rank + 1
-        rightDiff = node.rank + 1
+    def rank_diffs(self, node):
+        ldiff = node.rank + 1
+        rdiff = node.rank + 1
         if node.left:
-            leftDiff = node.rank - node.left.rank
+            ldiff = node.rank - node.left.rank
         if node.right:
-            rightDiff = node.rank - node.right.rank
+            rdiff = node.rank - node.right.rank
 
-        return (leftDiff, rightDiff)
+        return (ldiff, rdiff)
 
     def promote(self, node):
         node.rank += 1
@@ -101,41 +108,41 @@ class WAVL:
     def insert_rebalance(self, node):
         parent_diffs = self.rank_diffs(node.parent)
         if parent_diffs == (0, 1) or parent_diffs == (1, 0):
-            currentNode = node
-            while (currentNode.parent and
-                   (self.rank_diffs(currentNode.parent) == (0, 1) or
-                    self.rank_diffs(currentNode.parent) == (1, 0))):
-                self.promote(currentNode.parent)
-                currentNode = currentNode.parent
+            curr_node = node
+            while (curr_node.parent and
+                   (self.rank_diffs(curr_node.parent) == (0, 1) or
+                    self.rank_diffs(curr_node.parent) == (1, 0))):
+                self.promote(curr_node.parent)
+                curr_node = curr_node.parent
 
-            if (currentNode.parent and
-                (self.rank_diffs(currentNode.parent) == (0, 2) or
-                 self.rank_diffs(currentNode.parent) == (2, 0))):
-                if currentNode == currentNode.parent.left:
-                    z = currentNode.parent
-                    y = currentNode.right
-                    if y == None or currentNode.rank - y.rank == 2:
-                        self.right_rotate(currentNode.parent)
+            if (curr_node.parent and
+                (self.rank_diffs(curr_node.parent) == (0, 2) or
+                 self.rank_diffs(curr_node.parent) == (2, 0))):
+                if curr_node == curr_node.parent.left:
+                    z = curr_node.parent
+                    y = curr_node.right
+                    if y == None or curr_node.rank - y.rank == 2:
+                        self.right_rotate(curr_node.parent)
                         self.demote(z)
                     else:
                         self.left_rotate(y.parent)
                         self.right_rotate(y.parent)
                         self.promote(y)
                         assert y.left != None or y.right != None
-                        self.demote(currentNode)
+                        self.demote(curr_node)
                         self.demote(z)
                 else:
-                    z = currentNode.parent
-                    y = currentNode.left
-                    if y == None or currentNode.rank - y.rank == 2:
-                        self.left_rotate(currentNode.parent)
+                    z = curr_node.parent
+                    y = curr_node.left
+                    if y == None or curr_node.rank - y.rank == 2:
+                        self.left_rotate(curr_node.parent)
                         self.demote(z)
                     else:
                         self.right_rotate(y.parent)
                         self.left_rotate(y.parent)
                         self.promote(y)
                         assert y.left != None or y.right != None
-                        self.demote(currentNode)
+                        self.demote(curr_node)
                         self.demote(z)
 
     def insert(self, key):

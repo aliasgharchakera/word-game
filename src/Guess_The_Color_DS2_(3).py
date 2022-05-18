@@ -266,58 +266,6 @@ for i in range(2):
     elif i == 1:
         indicator_x = 80
 
-#Goes through each of the letter in our guess and checks whether they should be green, yellow or grey
-def check_guess(guess_to_check):
-    # Goes through each letter and checks if it should be green, yellow, or grey.
-    global current_guess, current_guess_string,current_letter_bg_x
-    current_letter_bg_x = 110
-    guess_to_check[i].draw()
-    pygame.display.update()
-    print(current_guess_string)
-    '''
-    global current_guess, current_guess_string, guesses_count, current_letter_bg_x, game_result
-    game_decided = False
-    for i in range(5):
-        lowercase_letter = guess_to_check[i].text.lower()
-        if lowercase_letter in CORRECT_WORD:
-            if lowercase_letter == CORRECT_WORD[i]:
-                guess_to_check[i].bg_color = GREEN
-                for indicator in indicators:
-                    if indicator.text == lowercase_letter.upper():
-                        indicator.bg_color = GREEN
-                        indicator.draw()
-                guess_to_check[i].text_color = "white"
-                if not game_decided:
-                    game_result = "W"
-            else:
-                guess_to_check[i].bg_color = YELLOW
-                for indicator in indicators:
-                    if indicator.text == lowercase_letter.upper():
-                        indicator.bg_color = YELLOW
-                        indicator.draw()
-                guess_to_check[i].text_color = "white"
-                game_result = ""
-                game_decided = True
-        else:
-            guess_to_check[i].bg_color = GREY
-            for indicator in indicators:
-                if indicator.text == lowercase_letter.upper():
-                    indicator.bg_color = GREY
-                    indicator.draw()
-            guess_to_check[i].text_color = "white"
-            game_result = ""
-            game_decided = True
-        guess_to_check[i].draw()
-        pygame.display.update()
-
-    guesses_count += 1
-    current_guess = []
-    current_guess_string = ""
-    current_letter_bg_x = 110
-
-    if guesses_count == 6 and game_result == "":
-        game_result = "L"
-'''
 #Puts Play Again text on the screen
 def play_again():
     # Puts the play again text on the screen.
@@ -338,6 +286,7 @@ def reset():
     SCREEN.fill("white")
     SCREEN.blit(BACKGROUND, BACKGROUND_RECT)
     guesses_count = 0
+    score_show(10, 7)
     # CORRECT_WORD = random.choice(WORDS)
     guesses = [[]] * 6
     current_guess = []
@@ -348,21 +297,21 @@ def reset():
         indicator.bg_color = OUTLINE
         indicator.draw()
 
-def reset_2():
-    global guesses_count, CORRECT_WORD, guesses, current_guess, current_guess_string, game_result
-    SCREEN.fill(WHITE, (0, 0, SCREEN.get_width()// 2, SCREEN.get_height()))
-    #SCREEN.blit(BACKGROUND, BACKGROUND_RECT)
-    pygame.display.flip()
-    guesses_count = 0
-    # CORRECT_WORD = random.choice(WORDS)
-    guesses = [[]] * 6
-    current_guess = []
-    current_guess_string = ""
-    game_result = ""
-    #pygame.display.update()
-    for indicator in indicators:
-        indicator.bg_color = OUTLINE
-        indicator.draw()
+# def reset_2():
+#     global guesses_count, CORRECT_WORD, guesses, current_guess, current_guess_string, game_result
+#     SCREEN.fill(WHITE, (0, 0, SCREEN.get_width()// 2, SCREEN.get_height()))
+#     #SCREEN.blit(BACKGROUND, BACKGROUND_RECT)
+#     pygame.display.flip()
+#     guesses_count = 0
+#     # CORRECT_WORD = random.choice(WORDS)
+#     guesses = [[]] * 6
+#     current_guess = []
+#     current_guess_string = ""
+#     game_result = ""
+#     #pygame.display.update()
+#     for indicator in indicators:
+#         indicator.bg_color = OUTLINE
+#         indicator.draw()
 
 
 #Allows us to type on the screen
@@ -403,6 +352,8 @@ while True:
             sys.exit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN: #The enter key
+                letter_used = ""
+                current_letter_bg_x = 200
                 if game_result != "": #If the game has finished
                     reset()
                 else:
@@ -413,7 +364,7 @@ while True:
                         if valid_word:
                             score_value += 5
                             print(score_value)
-                            if points >= 25:
+                            if score_value >= 25:
                                 game_result = "W"
                         else:
                             if current_guess_string in done:
@@ -421,7 +372,7 @@ while True:
                             else:
                                 print("Invalid word")
                         # score_value += 1
-                        reset_2()
+                        reset()
                         #Remove the word from screen after storing, to give space for new words
             elif event.key == pygame.K_BACKSPACE: #Deleting a letter
                 if len(current_guess_string) > 0:
