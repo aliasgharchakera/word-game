@@ -14,6 +14,10 @@ while True:
     pygame.display.update()
     rules.fill((0,0,0))
     rules.blit(icon, (0,0))
-    pygame.display.update()
-
     
+    pygame.display.update()
+    if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+
+
