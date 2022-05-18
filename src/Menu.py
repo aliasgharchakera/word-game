@@ -6,7 +6,7 @@ from pygame.locals import *
 pygame.init()
 disp = pygame.display.set_mode((800, 600),RESIZABLE)
 color = (139,71,93)
-background_img = pygame.image.load('game.webp')
+#background_img = pygame.image.load('game.webp')
 
 # Changing surface color
 disp.fill(color)
@@ -44,6 +44,7 @@ rect_title = surface_title.get_rect() #get_rect() is my favorite Pygame function
 rect_title.center = (width/2,(height/4)+3)
 surface_new_game = font_menu.render('START', True, (0,0,0))
 rect_new_game = surface_new_game.get_rect()
+
 rect_new_game.center = (width/2,(height/2)+(height/20)+3)
 surface_load_game = font_menu.render('RULES', True, (0,0,0))
 rect_load_game = surface_load_game.get_rect()
@@ -127,6 +128,8 @@ while True:
                     surface_exit = font_menu.render('QUIT', True, (0,0,0))           
         if window == 2:
             print(True)
+        if window == 3:
+            exec(open('game_screen.py').read())
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
