@@ -90,8 +90,6 @@ def truewords(perms): #perms is permutations list from getallperms function
 
 def main():
     print("Loading data...")
-    wavl = WAVL()
-    load_data('urbandict-csv.csv', wavl)
     print("Loaded data successfully")
     while True:
         alph = alphabet_generator()
