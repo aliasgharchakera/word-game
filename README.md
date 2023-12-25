@@ -53,3 +53,10 @@ The dictionary used in the game was the `nltk` corpus. The corpus was filtered t
 - [Rank-Balanced Trees - B Haeupler, S Sen, R Tarjan](https://link.springer.com/chapter/10.1007/978-3-642-03367-4_31)
 - [Weak AVL Trees - M. T. Goodrich and R. Tamassia](https://ics.uci.edu/~goodrich/teach/cs165/notes/WeakAVLTrees.pdf)
 - [Dr. Waqar Saleem](https://github.com/waqarsaleem)
+
+## Authors
+- [Ali Asghar Chakera](https://github.com/aliasgharchakera)
+- [Ali Ibrahim Sufi](https://github.com/AliSufi786)
+- [Faryal Khan](https://github.com/fk06676)
+- [Humayun Hasan](https://github.com/humayunh)
+- [Shehryar Amin](https://github.com/Shehryar-Amin-sa06442)
