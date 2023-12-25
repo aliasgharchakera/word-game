@@ -127,7 +127,7 @@ while True:
                 else:
                     surface_exit = font_menu.render('QUIT', True, (0,0,0))           
         if window == 2:
-            print(True)
+            exec(open('rules.py').read())
         if window == 3:
             exec(open('game_screen.py').read())
         if event.type == QUIT:

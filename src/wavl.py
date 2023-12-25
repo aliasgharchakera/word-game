@@ -1,6 +1,5 @@
 class WAVLNode:
     def __init__(self, key, left=None, right=None, rank=0, parent=None):
-        #super(WAVLNode, self).__init__(key, left, right, parent)
         self.left = left
         self.right = right
         self.key = key
@@ -57,7 +56,6 @@ class WAVL:
         else:
             return self._search(key, node.right)
 
-    # adapted from CLRS edition 3, page 313
     def left_rotate(self, x):
         y = x.right
         x.right = y.left
@@ -73,7 +71,6 @@ class WAVL:
         y.left = x
         x.parent = y
 
-    # adapted from CLRS edition 3, page 313
     def right_rotate(self, x):
         y = x.left
         x.left = y.right
@@ -168,7 +165,6 @@ class WAVL:
     def remove(self, key):
         self._remove(self.get_node(key, self.root))
 
-    # adapted from CLRS edition 3, page 296
     def transplant(self, u, v):
         if u.parent == None:
             self.root = v
@@ -181,7 +177,6 @@ class WAVL:
             v.parent = u.parent
 
 
-    # adapted from CLRS edition 3, page 298
     def _remove(self, z):
         if(z==None):
             return None

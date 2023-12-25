@@ -1,7 +1,8 @@
 # import csv
 # import nltk
 # import json
-# nltk.download()
+# import nltk
+# nltk.download("words")
 from random import randint, choice
 # from this import d
 # from webbrowser import get
@@ -90,6 +91,8 @@ def truewords(perms): #perms is permutations list from getallperms function
 
 def main():
     print("Loading data...")
+    wavl = WAVL()
+    load_data("bruh", wavl)
     print("Loaded data successfully")
     while True:
         alph = alphabet_generator()
